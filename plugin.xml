@@ -20,10 +20,10 @@
 
 <plugin
       xmlns="http://apache.org/cordova/ns/plugins/1.0"
-      id="cordova-plugin-themeablebrowser"
-      version="0.2.17">
+      id="bmb-cordova-plugin-themeablebrowser"
+      version="1.0.0">
 
-    <name>ThemeableBrowser</name>
+    <name>BmbThemeableBrowser</name>
     <description>Cordova ThemeableBrowser Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,in,app,browser,themeablebrowser</keywords>

@@ -475,6 +475,10 @@
     NSURL* url = request.URL;
     BOOL isTopLevelNavigation = [request.URL isEqual:[request mainDocumentURL]];
 
+    if ([[url scheme] isEqualToString:@"abamobilebank"]) {
+      [[UIApplication sharedApplication] openURL:url];
+    }
+
     // See if the url uses the 'gap-iab' protocol. If so, the host should be the id of a callback to execute,
     // and the path, if present, should be a JSON-encoded value to pass to the callback.
     if ([[url scheme] isEqualToString:@"gap-iab"]) {

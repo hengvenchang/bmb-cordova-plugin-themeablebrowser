@@ -1,9 +1,9 @@
 {
-  "name": "cordova-plugin-themeablebrowser",
-  "version": "0.2.18",
-  "description": "Cordova ThemeableBrowser Plugin",
+  "name": "bmb-cordova-plugin-themeablebrowser",
+  "version": "1.0.0",
+  "description": "Bookmebus Cordova ThemeableBrowser Plugin",
   "cordova": {
-    "id": "cordova-plugin-themeablebrowser",
+    "id": "bmb-cordova-plugin-themeablebrowser",
     "platforms": [
       "android",
       "amazon-fireos",
