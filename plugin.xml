@@ -21,7 +21,7 @@
 <plugin
       xmlns="http://apache.org/cordova/ns/plugins/1.0"
       id="bmb-cordova-plugin-themeablebrowser"
-      version="1.0.0">
+      version="1.0.1">
 
     <name>BmbThemeableBrowser</name>
     <description>Cordova ThemeableBrowser Plugin</description>

@@ -1,6 +1,6 @@
 {
   "name": "bmb-cordova-plugin-themeablebrowser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Bookmebus Cordova ThemeableBrowser Plugin",
   "cordova": {
     "id": "bmb-cordova-plugin-themeablebrowser",
