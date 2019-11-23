@@ -1219,8 +1219,14 @@ public class ThemeableBrowser extends CordovaPlugin {
             String urlScheme = Uri.parse(url).getScheme();
 
             if(isPaywayDeeplink(host, urlScheme)) {
-              openDeeplink(url);
-              return false;
+               try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                cordova.getActivity().startActivity(intent);
+              return true;
+                } catch () {
+                    Log.e(LOG_TAG, "Error dialing " + url + ": " + e.toString());
+                }
             }
 
             if (url.startsWith(WebView.SCHEME_TEL)) {
@@ -1278,12 +1284,6 @@ public class ThemeableBrowser extends CordovaPlugin {
          // Start of your custom code for opening deep link of ABA pay
         private boolean isPaywayDeeplink(String host, String scheme) {
             return host.equalsIgnoreCase(ABA_HOST) && scheme.equalsIgnoreCase(ABA_SCHEME);
-        }
-
-        private void openDeeplink(String url){
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(url));
-            cordova.getActivity().startActivity(intent);
         }
 
 
