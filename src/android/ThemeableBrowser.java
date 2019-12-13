@@ -1223,8 +1223,8 @@ public class ThemeableBrowser extends CordovaPlugin {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
                 cordova.getActivity().startActivity(intent);
-              return true;
-                } catch () {
+                return true;
+                } catch (android.content.ActivityNotFoundException e) {
                     Log.e(LOG_TAG, "Error dialing " + url + ": " + e.toString());
                 }
             }
