@@ -19,9 +19,11 @@
 package com.initialxy.cordova.themeablebrowser;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -77,6 +79,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+
 
 @SuppressLint("SetJavaScriptEnabled")
 public class ThemeableBrowser extends CordovaPlugin {
@@ -1205,6 +1209,18 @@ public class ThemeableBrowser extends CordovaPlugin {
             this.callback = callback;
         }
 
+
+        public boolean isPackageInstalled(String packageName, PackageManager packageManager) {
+            boolean found = true;
+            try {
+                packageManager.getPackageInfo(packageName,0);
+                found = true;
+            } catch (PackageManager.NameNotFoundException e) {
+                found = false;
+            }
+            return found;
+        }
+
         /**
          * Override the URL that should be loaded
          *
@@ -1219,16 +1235,26 @@ public class ThemeableBrowser extends CordovaPlugin {
             String urlScheme = Uri.parse(url).getScheme();
 
             if(isPaywayDeeplink(host, urlScheme)) {
-               try {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                cordova.getActivity().startActivity(intent);
-                return true;
-                } catch (android.content.ActivityNotFoundException e) {
-                    Log.e(LOG_TAG, "Error dialing " + url + ": " + e.toString());
+                String packageName = "com.paygo24.ibank";
+                //if aba is install open aba app
+                PackageManager pm  = cordova.getActivity().getPackageManager();
+                if(this.isPackageInstalled(packageName,pm) == true){
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(url));
+                        cordova.getActivity().startActivity(intent);
+                        return true;
+                    } catch (android.content.ActivityNotFoundException e) {
+                        Log.e(LOG_TAG, "Error dialing " + url + ": " + e.toString());
+                    }
+                }
+                else{
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("market://details?id=" + packageName));
+                    cordova.getActivity().startActivity(intent);
+                    return true;
                 }
             }
-
             if (url.startsWith(WebView.SCHEME_TEL)) {
                 try {
                     Intent intent = new Intent(Intent.ACTION_DIAL);
